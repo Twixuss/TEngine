@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="core">
+      <UniqueIdentifier>{4E40957C-3A77-960D-E363-7C10CF79120F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\core\common.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\console.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\core.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\input.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\precompiled.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\sound.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\window.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tengine.h" />
+    <ClInclude Include="src\core\FileReader.h" />
+    <ClInclude Include="src\core\FileWriter.h" />
+    <ClInclude Include="src\core\graphics\RendererD3D11.h" />
+    <ClInclude Include="src\core\graphics\renderer.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\graphics\shader.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\graphics\MeshBuffers.h" />
+    <ClInclude Include="src\core\graphics\mesh.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\graphics\RendererD3D12.h" />
+    <ClInclude Include="src\core\graphics\ShaderBuffers.h" />
+    <ClInclude Include="src\core\Monitor.h" />
+    <ClInclude Include="src\core\Clock.h" />
+    <ClInclude Include="src\core\FixedUpdater.h" />
+    <ClInclude Include="src\core\graphics\MeshRenderer.h" />
+    <ClInclude Include="src\core\graphics\Material.h" />
+    <ClInclude Include="src\core\math\Vector2.h" />
+    <ClInclude Include="src\core\math\Vector3.h" />
+    <ClInclude Include="src\core\math\Vector4.h" />
+    <ClInclude Include="src\core\math\Constants.h" />
+    <ClInclude Include="src\core\math\Functions.h" />
+    <ClInclude Include="src\core\math\Matrix4x4.h" />
+    <ClInclude Include="src\core\graphics\Texture.h" />
+    <ClInclude Include="src\core\Transform.h" />
+    <ClInclude Include="src\core\math\Vector4XM.h" />
+    <ClInclude Include="src\core\graphics\RendererEmpty.h" />
+    <ClInclude Include="src\core\graphics\Graphics.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\core\common.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\console.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\core.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\input.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\precompiled.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\sound.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\window.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\FileReader.cpp" />
+    <ClCompile Include="src\core\FileWriter.cpp" />
+    <ClCompile Include="src\core\graphics\RendererD3D11.cpp" />
+    <ClCompile Include="src\core\graphics\renderer.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\graphics\shader.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\graphics\mesh.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\graphics\RendererD3D12.cpp" />
+    <ClCompile Include="src\core\Clock.cpp" />
+    <ClCompile Include="src\core\FixedUpdater.cpp" />
+    <ClCompile Include="src\core\graphics\MeshRenderer.cpp" />
+    <ClCompile Include="src\core\graphics\Texture.cpp" />
+    <ClCompile Include="src\core\graphics\RendererEmpty.cpp" />
+  </ItemGroup>
+</Project>

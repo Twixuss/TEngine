@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CF4FD0EE-3B2F-4F8A-4447-DA60B0A5B5EB}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>TEngine</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\bin\Debug-windows-x86_64\TEngine\</OutDir>
+    <IntDir>..\bin-int\Debug-windows-x86_64\TEngine\</IntDir>
+    <TargetName>TEngine</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\bin\Release-windows-x86_64\TEngine\</OutDir>
+    <IntDir>..\bin-int\Release-windows-x86_64\TEngine\</IntDir>
+    <TargetName>TEngine</TargetName>
+    <TargetExt>.lib</TargetExt>
+    <CodeAnalysisRuleSet>all.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>TENGINE_LIBRARY_TYPE=TENGINE_LIBRARY_DLL;TENGINE_PLATFORM=TENGINE_PLATFORM_WINDOWS;TENGINE_LIBRARY;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..;src;src\core;..\Dependencies\DirectX\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>precompiled.h</ForcedIncludeFiles>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <PreprocessToFile>false</PreprocessToFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>d2d1.lib;d3d10.lib;d3d10_1.lib;d3d11.lib;d3d9.lib;d3dcompiler.lib;D3DCSX.lib;D3DCSXd.lib;d3dx10.lib;d3dx10d.lib;d3dx11.lib;d3dx11d.lib;d3dx9.lib;d3dx9d.lib;d3dxof.lib;dinput8.lib;dsound.lib;dwrite.lib;DxErr.lib;dxgi.lib;dxguid.lib;X3DAudio.lib;xapobase.lib;xapobased.lib;XAPOFX.lib;XInput.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\Dependencies\DirectX\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>..\bin\Debug-windows-x86_64\TEngine\TEngine.lib</ImportLibrary>
+    </Link>
+    <PostBuildEvent>
+      <Command>IF EXIST ..\bin\Debug-windows-x86_64\TEngine\TEngine.lib\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\TEngine\TEngine.lib ..\bin\Debug-windows-x86_64\Game &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\TEngine\TEngine.lib ..\bin\Debug-windows-x86_64\Game &gt; nul)</Command>
+    </PostBuildEvent>
+    <Lib>
+      <AdditionalDependencies>d2d1.lib;d3d10.lib;d3d10_1.lib;d3d11.lib;d3d9.lib;d3dcompiler.lib;D3DCSX.lib;D3DCSXd.lib;d3dx10.lib;d3dx10d.lib;d3dx11.lib;d3dx11d.lib;d3dx9.lib;d3dx9d.lib;d3dxof.lib;dinput8.lib;dsound.lib;dwrite.lib;DxErr.lib;dxgi.lib;dxguid.lib;X3DAudio.lib;xapobase.lib;xapobased.lib;XAPOFX.lib;XInput.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\Dependencies\DirectX\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>TENGINE_LIBRARY_TYPE=TENGINE_LIBRARY_DLL;TENGINE_PLATFORM=TENGINE_PLATFORM_WINDOWS;TENGINE_LIBRARY;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..;src;src\core;..\Dependencies\DirectX\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>precompiled.h</ForcedIncludeFiles>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <PreprocessToFile>false</PreprocessToFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>d2d1.lib;d3d10.lib;d3d10_1.lib;d3d11.lib;d3d9.lib;d3dcompiler.lib;D3DCSX.lib;D3DCSXd.lib;d3dx10.lib;d3dx10d.lib;d3dx11.lib;d3dx11d.lib;d3dx9.lib;d3dx9d.lib;d3dxof.lib;dinput8.lib;dsound.lib;dwrite.lib;DxErr.lib;dxgi.lib;dxguid.lib;X3DAudio.lib;xapobase.lib;xapobased.lib;XAPOFX.lib;XInput.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\Dependencies\DirectX\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>..\bin\Release-windows-x86_64\TEngine\TEngine.lib</ImportLibrary>
+    </Link>
+    <PostBuildEvent>
+      <Command>IF EXIST ..\bin\Release-windows-x86_64\TEngine\TEngine.lib\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\TEngine\TEngine.lib ..\bin\Release-windows-x86_64\Game &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\TEngine\TEngine.lib ..\bin\Release-windows-x86_64\Game &gt; nul)</Command>
+    </PostBuildEvent>
+    <Lib>
+      <AdditionalDependencies>d2d1.lib;d3d10.lib;d3d10_1.lib;d3d11.lib;d3d9.lib;d3dcompiler.lib;D3DCSX.lib;D3DCSXd.lib;d3dx10.lib;d3dx10d.lib;d3dx11.lib;d3dx11d.lib;d3dx9.lib;d3dx9d.lib;d3dxof.lib;dinput8.lib;dsound.lib;dwrite.lib;DxErr.lib;dxgi.lib;dxguid.lib;X3DAudio.lib;xapobase.lib;xapobased.lib;XAPOFX.lib;XInput.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\Dependencies\DirectX\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="src\core\Clock.h" />
+    <ClInclude Include="src\core\common.h" />
+    <ClInclude Include="src\core\console.h" />
+    <ClInclude Include="src\core\core.h" />
+    <ClInclude Include="src\core\FileReader.h" />
+    <ClInclude Include="src\core\FileWriter.h" />
+    <ClInclude Include="src\core\FixedUpdater.h" />
+    <ClInclude Include="src\core\graphics\Graphics.h" />
+    <ClInclude Include="src\core\graphics\Material.h" />
+    <ClInclude Include="src\core\graphics\MeshRenderer.h" />
+    <ClInclude Include="src\core\graphics\RendererD3D12.h" />
+    <ClInclude Include="src\core\graphics\RendererEmpty.h" />
+    <ClInclude Include="src\core\graphics\ShaderBuffers.h" />
+    <ClInclude Include="src\core\graphics\Texture.h" />
+    <ClInclude Include="src\core\math\Vector4XM.h" />
+    <ClInclude Include="src\core\Transform.h" />
+    <ClInclude Include="src\core\input.h" />
+    <ClInclude Include="src\core\graphics\mesh.h" />
+    <ClInclude Include="src\core\graphics\MeshBuffers.h" />
+    <ClInclude Include="src\core\math\Constants.h" />
+    <ClInclude Include="src\core\math\Functions.h" />
+    <ClInclude Include="src\core\math\Matrix4x4.h" />
+    <ClInclude Include="src\core\math\Vector2.h" />
+    <ClInclude Include="src\core\math\Vector3.h" />
+    <ClInclude Include="src\core\math\Vector4.h" />
+    <ClInclude Include="src\core\Monitor.h" />
+    <ClInclude Include="src\core\precompiled.h" />
+    <ClInclude Include="src\core\graphics\renderer.h" />
+    <ClInclude Include="src\core\graphics\RendererD3D11.h" />
+    <ClInclude Include="src\core\graphics\shader.h" />
+    <ClInclude Include="src\core\sound.h" />
+    <ClInclude Include="src\core\window.h" />
+    <ClInclude Include="src\tengine.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\core\Clock.cpp" />
+    <ClCompile Include="src\core\common.cpp" />
+    <ClCompile Include="src\core\console.cpp" />
+    <ClCompile Include="src\core\core.cpp" />
+    <ClCompile Include="src\core\FileReader.cpp" />
+    <ClCompile Include="src\core\FileWriter.cpp" />
+    <ClCompile Include="src\core\FixedUpdater.cpp" />
+    <ClCompile Include="src\core\graphics\MeshRenderer.cpp" />
+    <ClCompile Include="src\core\graphics\RendererD3D12.cpp" />
+    <ClCompile Include="src\core\graphics\RendererEmpty.cpp" />
+    <ClCompile Include="src\core\graphics\Texture.cpp" />
+    <ClCompile Include="src\core\input.cpp" />
+    <ClCompile Include="src\core\graphics\mesh.cpp" />
+    <ClCompile Include="src\core\precompiled.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\core\graphics\renderer.cpp" />
+    <ClCompile Include="src\core\graphics\RendererD3D11.cpp" />
+    <ClCompile Include="src\core\graphics\shader.cpp" />
+    <ClCompile Include="src\core\sound.cpp" />
+    <ClCompile Include="src\core\window.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
