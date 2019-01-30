@@ -1,24 +1,33 @@
 #pragma once
+//#include "Vector.h"
 namespace TEngine::Math {
    template<typename Scalar>
-   struct Vector2 {
-      using Self = Vector2<Scalar>;
-      using SelfRef = Vector2<Scalar>&;
-      using SelfCRef = Vector2<Scalar>& const;
+   struct Vector2 { 
+      using Vector = Vector2<Scalar>;
       Scalar x, y;
-      Vector2() : x(0), y(0) {}
-      Vector2(Scalar v) : x(v), y(v) {}
-      Vector2(Scalar x, Scalar y) : x(x), y(y) {}
-      Vector2(SelfCRef v) : x(v.x), y(v.y) {}
-      SelfRef Set(Scalar x, Scalar y) {
+      Vector() : x(0), y(0) {}
+      Vector(const Scalar& v) : x(v), y(v) {}
+      Vector(const Scalar& x, const Scalar& y) : x(x), y(y) {}
+      Vector(const Vector& v) : x(v.x), y(v.y) {}
+      Vector& operator= (const Scalar& v) {
+         return Set(v);
+      }
+      Vector& operator= (const Vector& v) {
+         return Set(v);
+      }
+      Vector& Set(const Scalar& v) {
+         return Set(v, v);
+      }
+      Vector& Set(const Vector& v) {
+         return Set(v.x, v.y);
+      }
+      Vector& Set(const Scalar& x, const Scalar& y) {
          this->x = x;
          this->y = y;
          return *this;
       }
-      SelfRef Set(SelfCRef v) {
-         this->x = v.x;
-         this->y = v.y;
-         return *this;
+      Vector  Copy() {
+         return Vector(*this);
       }
       Scalar  LengthSqr() const {
          return x * x + y * y;
@@ -26,108 +35,104 @@ namespace TEngine::Math {
       Scalar  Length() const {
          return sqrt(LengthSqr());
       }
-      SelfRef Normalize() {
+      Vector& Normalize() {
          return *this *= 1.0f / Length();
       }
-      Self    Normalized() const {
-         return Self(*this) * (1.0f / Length());
+      Vector  Normalized() const {
+         return Vector(*this) * (1.0f / Length());
       }
-      SelfRef ProjectOn(SelfCRef v) {
+      Vector& ProjectOn(const Vector& v) {
          return *this = v.Normalized() * Dot(*this, v.Normalized());
       }
-      Self    ProjectedOn(SelfCRef v) const {
+      Vector  ProjectedOn(const Vector& v) const {
          return v.Normalized() * Dot(*this, v.Normalized());
       }
-      Self    operator+ () {
-         return Vector2(+x, +y);
+      friend bool operator==(const Vector& a, const Vector& b) {
+         return a.x == b.x && a.y == b.y;
       }
-      Self    operator- () {
-         return Vector2(-x, -y);
+      friend bool operator!=(const Vector& a, const Vector& b) {
+         return !operator==(a, b);
       }
-      SelfRef operator= (const Scalar  &v) {
-         x = v;
-         y = v;
-         return *this;
-      }
-      SelfRef operator+=(const Scalar  &v) {
+      friend Vector& operator+=(Vector& a, const Scalar&  b) {
          x += v;
          y += v;
-         return *this;
+         return a;
       }
-      SelfRef operator-=(const Scalar  &v) {
+      friend Vector& operator-=(Vector& a, const Scalar&  b) {
          x -= v;
          y -= v;
-         return *this;
+         return a;
       }
-      SelfRef operator*=(const Scalar  &v) {
+      friend Vector& operator*=(Vector& a, const Scalar&  b) {
          x *= v;
          y *= v;
-         return *this;
+         return a;
       }
-      SelfRef operator/=(const Scalar  &v) {
+      friend Vector& operator/=(Vector& a, const Scalar&  b) {
          x /= v;
          y /= v;
-         return *this;
+         return a;
       }
-      Self    operator+ (const Scalar  &v) {
-         return Vector2(x + v, y + v);
-      }
-      Self    operator- (const Scalar  &v) {
-         return Vector2(x - v, y - v);
-      }
-      Self    operator* (const Scalar  &v) {
-         return Vector2(x * v, y * v);
-      }
-      Self    operator/ (const Scalar  &v) {
-         return Vector2(x / v, y / v);
-      }
-      SelfRef operator= (SelfCRef v) {
-         x = v.x;
-         y = v.y;
-         return *this;
-      }
-      SelfRef operator+=(SelfCRef v) {
+      friend Vector& operator+=(Vector& a, const Vector& b) {
          x += v.x;
          y += v.y;
-         return *this;
+         return a;
       }
-      SelfRef operator-=(SelfCRef v) {
+      friend Vector& operator-=(Vector& a, const Vector& b) {
          x -= v.x;
          y -= v.y;
-         return *this;
+         return a;
       }
-      SelfRef operator*=(SelfCRef v) {
+      friend Vector& operator*=(Vector& a, const Vector& b) {
          x *= v.x;
          y *= v.y;
-         return *this;
+         return a;
       }
-      SelfRef operator/=(SelfCRef v) {
+      friend Vector& operator/=(Vector& a, const Vector& b) {
          x /= v.x;
          y /= v.y;
-         return *this;
+         return a;
       }
-      Self    operator+ (SelfCRef v) {
-         return Vector2(x + v.x, y + v.y);
+      friend Vector  operator+ (const Vector& a) {
+         return Vector(+a.x, +a.y);
       }
-      Self    operator- (SelfCRef v) {
-         return Vector2(x - v.x, y - v.y);
+      friend Vector  operator- (const Vector& a) {
+         return Vector(-a.x, -a.y);
       }
-      Self    operator* (SelfCRef v) {
-         return Vector2(x * v.x, y * v.y);
+      friend Vector  operator+ (const Vector& a, const Scalar&  b) {
+         return Vector(x + v, y + v);
       }
-      Self    operator/ (SelfCRef v) {
-         return Vector2(x / v.x, y / v.y);
+      friend Vector  operator- (const Vector& a, const Scalar&  b) {
+         return Vector(x - v, y - v);
       }
-      Scalar  operator^ (SelfCRef v) {
-         return acos(Dot(*this, v) / (Length() * v.Length()));
+      friend Vector  operator* (const Vector& a, const Scalar&  b) {
+         return Vector(x * v, y * v);
       }
-      static Scalar Dot(SelfCRef a, SelfCRef b) {
-         return a.x * b.x + a.y * b.y;
+      friend Vector  operator/ (const Vector& a, const Scalar&  b) {
+         return Vector(x / v, y / v);
+      }
+      friend Vector  operator+ (const Vector& a, const Vector& b) {
+         return Vector(a.x + b.x, a.y + b.y);
+      }
+      friend Vector  operator- (const Vector& a, const Vector& b) {
+         return Vector(a.x - b.x, a.y - b.y);
+      }
+      friend Vector  operator* (const Vector& a, const Vector& b) {
+         return Vector(a.x * b.x, a.y * b.y);
+      }
+      friend Vector  operator/ (const Vector& a, const Vector& b) {
+         return Vector(a.x / b.x, a.y / b.y);
+      }
+      friend Scalar  operator^ (const Vector& a, const Vector& b) {
+         return acos(Dot(a, b) / (a.Length() * b.Length()));
       }
       template<typename T>
-      friend std::basic_ostream<T> & operator<<(std::basic_ostream<T> & stream, SelfCRef vec) {
+      friend std::basic_ostream<T> & operator<<(std::basic_ostream<T> & stream, const Vector& vec) {
          stream << "[x:" << vec.x << ", y:" << vec.y << ']';
          return stream;
+      }
+      static Scalar Dot(const Vector& a, const Vector& b) {
+         return a.x * b.x + a.y * b.y;
       }
    };
    typedef Vector2<long> long2;

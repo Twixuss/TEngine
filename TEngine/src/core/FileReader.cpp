@@ -1,20 +1,23 @@
 #include "FileReader.h"
+#include "core/console.h"
 namespace TEngine {
-   FileReader::FileReader(CWString f, int m) : s(f, m) {
+   FileReader::FileReader(const String& f, int m) : s(f.CStr(), m) {
       closed = false;
-      TE_ASSERT(s);
+      if (!s) {
+         TE_ERROR("File ", f, " cannot be found");
+      }
    }
-   std::string FileReader::ReadWord(CString separators) {
-      std::string out;
+   String FileReader::ReadWord(const String& separators) {
+      String out;
       char c;
-      const auto Contains = [](CString sep, char ch) {
-         for (int i = 0;i < strlen(sep);i++)
+      const auto Contains = [](const String& sep, Char ch) {
+         for (int i = 0;i < sep.Length();i++)
             if (sep[i] == ch)
                return true;
          return false;
       };
       while (!Contains(separators, c = Peek())) {
-         out.push_back(c);
+         out.AddChar(c);
          Read(c);
       }
       return out;

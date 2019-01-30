@@ -1,7 +1,7 @@
 #pragma once
 #include "common.h"
 namespace TEngine{
-   struct TENGINE_API Repeater {
+   struct LibraryInterface Repeater {
       Repeater(float step);
       void Begin();
       // Returns number of steps passed since last Update call

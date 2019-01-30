@@ -1,9 +1,10 @@
 #pragma once
 #include "precompiled.h"
+#include "String.h"
 namespace TEngine {
-   extern HINSTANCE hInstance;
-   inline wchar CurrentDirectory[MAX_PATH];
-   struct Timestamp {
+   LibraryInterface extern Char CurrentDirectory[MAX_PATH];
+   LibraryInterface void StopProgram(int code);
+   struct LibraryInterface Timestamp {
       ushort ms, s, m, h;
       template<typename T>
       friend std::basic_ostream<T> & operator<<(std::basic_ostream<T> & stream, const Timestamp & t) {
@@ -27,7 +28,7 @@ namespace TEngine {
       }
    };
       
-   struct TENGINE_API Color {
+   struct LibraryInterface Color {
       // normalized values
       float r, g, b, a;
       Color();
@@ -43,11 +44,27 @@ namespace TEngine {
       }
    };
 
-   namespace Common {
-      inline void Init() {
-#if TENGINE_PLATFORM == TENGINE_PLATFORM_WINDOWS
-         GetCurrentDirectory(MAX_PATH, CurrentDirectory);
-#endif
+   template<typename Elem>
+   struct List {
+      std::vector<Elem> vec;
+      Elem& Add(const Elem& elem) {
+         vec.push_back(elem);
+         return vec.back();
       }
+      template<typename... Params>
+      Elem& AddInPlace(Params ...params) {
+         vec.emplace_back(params...);
+         return vec.back();
+      }
+      Elem& operator[](size_t index) {
+         return vec[index];
+      }
+      inline auto begin() { return vec.begin(); }
+      inline auto end() { return vec.end(); }
+   };
+
+   namespace Common {
+      LibraryInterface void Init();
+      LibraryInterface List<String> GetFilesInDirectory(const String& path);
    }
 }

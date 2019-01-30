@@ -1,0 +1,21 @@
+Detected memory leaks!
+Dumping objects ->
+{997} normal block at 0x00000145C470C670, 48 bytes long.
+ Data: <d a t a \ s h a > 64 00 61 00 74 00 61 00 5C 00 73 00 68 00 61 00 
+{996} normal block at 0x00000145C47094D0, 16 bytes long.
+ Data: < =u E           > 88 3D 75 C4 45 01 00 00 00 00 00 00 00 00 00 00 
+{963} normal block at 0x00000145C289EBA0, 64 bytes long.
+ Data: <d a t a \ s h a > 64 00 61 00 74 00 61 00 5C 00 73 00 68 00 61 00 
+{962} normal block at 0x00000145C4709020, 16 bytes long.
+ Data: <X=u E           > 58 3D 75 C4 45 01 00 00 00 00 00 00 00 00 00 00 
+{927} normal block at 0x00000145C470B9C0, 48 bytes long.
+ Data: <d a t a \ s h a > 64 00 61 00 74 00 61 00 5C 00 73 00 68 00 61 00 
+{926} normal block at 0x00000145C4708D50, 16 bytes long.
+ Data: <(=u E           > 28 3D 75 C4 45 01 00 00 00 00 00 00 00 00 00 00 
+{869} normal block at 0x00000145C4753D10, 6191 bytes long.
+ Data: <         =u E   > FA FA FA FA FA FA FA FA 10 3D 75 C4 45 01 00 00 
+{150} normal block at 0x00000145C27D6430, 16 bytes long.
+ Data: < 1+             > D0 31 2B D3 FC 7F 00 00 00 00 00 00 00 00 00 00 
+{149} normal block at 0x00000145C27D6570, 16 bytes long.
+ Data: <`-+             > 60 2D 2B D3 FC 7F 00 00 00 00 00 00 00 00 00 00 
+Object dump complete.

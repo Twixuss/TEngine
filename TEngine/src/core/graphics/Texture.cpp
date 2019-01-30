@@ -1,7 +1,7 @@
 #include "Texture.h"
 #include "renderer.h"
 namespace TEngine {
-   Texture::Texture(CWString filename) {
+   Texture::Texture(String filename) {
       //m_ID = Renderer::instance->GetNewTextureID();
       //Renderer::instance->CreateTextureFromFile(m_ID);
    }

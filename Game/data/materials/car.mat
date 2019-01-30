@@ -1,0 +1,4 @@
+shader data\shaders\testShader.hlsl
+data {
+   1,0,0,1
+}

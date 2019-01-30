@@ -1,5 +1,5 @@
-#include "precompiled.h"
-#include "RendererD3D12.h"
+#include "core/precompiled.h"
+#include "core/graphics/RendererD3D12.h"
 /*
 namespace TEngine {
    void RendererD3D12::Init(Window * wnd) {
@@ -27,16 +27,16 @@ namespace TEngine {
    void RendererD3D12::DrawMesh(Mesh * mesh, Shader * shader)
    {
    }
-   bool RendererD3D12::CompileShaderFromFile(Shader * shader, CWString filename)
+   bool RendererD3D12::CompileShaderFromFile(Shader * shader, String filename)
    {
       return false;
    }
    void RendererD3D12::SetActiveShader(Shader * shader)
    {
    }
-   CString RendererD3D12::GetName()
+   String RendererD3D12::GetName()
    {
-      return CString();
+      return String();
    }
 }
 */

@@ -31,10 +31,11 @@ namespace TEngine {
       return stream;
    }
    namespace Monitor {
-      extern TENGINE_API CWString Name;
-      extern TENGINE_API TEngine::Orientation Orientation;
-      extern TENGINE_API long2 Resolution;
-      extern TENGINE_API uint RefreshRate;
-      extern TENGINE_API uint BitsPerPixel;
+      LibraryInterface String GetName();
+      LibraryInterface TEngine::Orientation GetOrientation();
+      LibraryInterface long2 GetResolution();
+      LibraryInterface uint GetRefreshRate();
+      LibraryInterface uint GetBitsPerPixel();
+      LibraryInterface void Init();
    };
 }

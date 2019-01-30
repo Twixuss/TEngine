@@ -1,25 +1,17 @@
 #include "shader.h"
 #include "renderer.h"
-namespace TEngine {
-   Shader::Shader() : m_Stride(sizeof(float3)) {
-      m_ID = Renderer::instance->GetNewShaderID();
+namespace TEngine
+{
+   Shader::Shader() :
+      m_Stride(0),
+      m_Filename(),
+      m_ID(-1)
+   {
    }
-   Shader *Shader::CreateFromFile(CWString filename) {
-      auto s = new Shader;
-      if (!Renderer::instance->CompileShaderFromFile(s, filename)) {
-         s->Release();
-         static Shader *errorShader = CreateFromFile(L"data/shaders/error.hlsl");
-         return errorShader;
-      }
-      return s;
-   }
-   Shader *Shader::CreateFromSource(CString src) {
-      return nullptr;
-   }
-   void Shader::Release() {
-      Renderer::instance->ReleaseShader(this);
-   }
-   Shader::~Shader() {
-      Release();
+   Shader::Shader(const String& filename) :
+      m_Stride(sizeof(float3)), 
+      m_Filename(filename),
+      m_ID(-1)
+   {
    }
 }

@@ -1,4 +1,4 @@
-#include "common.hlsl"
+#include "includes/common.hlsl"
 struct VSI {
    float4 pos : POSITION;
 };

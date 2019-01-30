@@ -1,6 +1,14 @@
 #pragma once
 #include "core/math/Constants.h"
 namespace TEngine::Math {
+   template<typename T>
+   T& Max(const T& a, const T& b) {
+      return a < b ? b : a;
+   }
+   template<typename T>
+   T& Min(const T& a, const T& b) {
+      return a > b ? b : a;
+   }
    template<typename Scalar>
    inline constexpr auto Rad2Deg(Scalar v) { return v * PIdiv180inv; }
    template<typename Scalar>

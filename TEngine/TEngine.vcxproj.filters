@@ -1,104 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="core">
-      <UniqueIdentifier>{4E40957C-3A77-960D-E363-7C10CF79120F}</UniqueIdentifier>
+    <Filter Include="Core">
+      <UniqueIdentifier>{2EB4837C-1AEB-840D-C3D7-6A10AFED000F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Graphics">
+      <UniqueIdentifier>{2E10C882-9AD0-43B9-630B-8D36CF8A8895}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Input">
+      <UniqueIdentifier>{AD4E7BCD-9906-BD1A-020E-9676EEE4570B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Math">
+      <UniqueIdentifier>{C7E5BF15-3350-748C-7C8E-2532E83752E1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\core\common.h">
-      <Filter>core</Filter>
+    <ClInclude Include="src\Core\Application.h">
+      <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\console.h">
-      <Filter>core</Filter>
+    <ClInclude Include="src\Core\Clock.h">
+      <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\core.h">
-      <Filter>core</Filter>
+    <ClInclude Include="src\Core\Common.h">
+      <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\input.h">
-      <Filter>core</Filter>
+    <ClInclude Include="src\Core\Console.h">
+      <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\precompiled.h">
-      <Filter>core</Filter>
+    <ClInclude Include="src\Core\FileReader.h">
+      <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\sound.h">
-      <Filter>core</Filter>
+    <ClInclude Include="src\Core\FileWriter.h">
+      <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\window.h">
-      <Filter>core</Filter>
+    <ClInclude Include="src\Core\FixedUpdater.h">
+      <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\tengine.h" />
-    <ClInclude Include="src\core\FileReader.h" />
-    <ClInclude Include="src\core\FileWriter.h" />
-    <ClInclude Include="src\core\graphics\RendererD3D11.h" />
-    <ClInclude Include="src\core\graphics\renderer.h">
-      <Filter>core</Filter>
+    <ClInclude Include="src\Core\Graphics\Material.h">
+      <Filter>Core\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\graphics\shader.h">
-      <Filter>core</Filter>
+    <ClInclude Include="src\Core\Graphics\MeshBuffers.h">
+      <Filter>Core\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\graphics\MeshBuffers.h" />
-    <ClInclude Include="src\core\graphics\mesh.h">
-      <Filter>core</Filter>
+    <ClInclude Include="src\Core\Graphics\MeshRenderer.h">
+      <Filter>Core\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\graphics\RendererD3D12.h" />
-    <ClInclude Include="src\core\graphics\ShaderBuffers.h" />
-    <ClInclude Include="src\core\Monitor.h" />
-    <ClInclude Include="src\core\Clock.h" />
-    <ClInclude Include="src\core\FixedUpdater.h" />
-    <ClInclude Include="src\core\graphics\MeshRenderer.h" />
-    <ClInclude Include="src\core\graphics\Material.h" />
-    <ClInclude Include="src\core\math\Vector2.h" />
-    <ClInclude Include="src\core\math\Vector3.h" />
-    <ClInclude Include="src\core\math\Vector4.h" />
-    <ClInclude Include="src\core\math\Constants.h" />
-    <ClInclude Include="src\core\math\Functions.h" />
-    <ClInclude Include="src\core\math\Matrix4x4.h" />
-    <ClInclude Include="src\core\graphics\Texture.h" />
-    <ClInclude Include="src\core\Transform.h" />
-    <ClInclude Include="src\core\math\Vector4XM.h" />
-    <ClInclude Include="src\core\graphics\RendererEmpty.h" />
-    <ClInclude Include="src\core\graphics\Graphics.h" />
+    <ClInclude Include="src\Core\Graphics\Renderer.h">
+      <Filter>Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Graphics\RendererD3D11.h">
+      <Filter>Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Graphics\RendererD3D12.h">
+      <Filter>Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Graphics\Shader.h">
+      <Filter>Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Graphics\Texture.h">
+      <Filter>Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Graphics\mesh.h">
+      <Filter>Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Input\Input.h">
+      <Filter>Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Input\Keyboard.h">
+      <Filter>Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Input\Mouse.h">
+      <Filter>Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Math\Constants.h">
+      <Filter>Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Math\Functions.h">
+      <Filter>Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Math\Matrix4x4.h">
+      <Filter>Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Math\Vector.h">
+      <Filter>Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Math\Vector2.h">
+      <Filter>Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Math\Vector3.h">
+      <Filter>Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Math\Vector4.h">
+      <Filter>Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Math\Vector4XM.h">
+      <Filter>Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Monitor.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Precompiled.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Sound.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\String.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Transform.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Window.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TEngine.h" />
+    <ClInclude Include="src\Core\Input\Joystick.h" />
+    <ClInclude Include="src\Core\Input\KeyCombination.h" />
+    <ClInclude Include="src\Core\Graphics\MaterialParser.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\core\common.cpp">
-      <Filter>core</Filter>
+    <ClCompile Include="src\Core\Application.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\console.cpp">
-      <Filter>core</Filter>
+    <ClCompile Include="src\Core\Clock.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\core.cpp">
-      <Filter>core</Filter>
+    <ClCompile Include="src\Core\Common.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\input.cpp">
-      <Filter>core</Filter>
+    <ClCompile Include="src\Core\Console.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\precompiled.cpp">
-      <Filter>core</Filter>
+    <ClCompile Include="src\Core\FileReader.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\sound.cpp">
-      <Filter>core</Filter>
+    <ClCompile Include="src\Core\FileWriter.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\window.cpp">
-      <Filter>core</Filter>
+    <ClCompile Include="src\Core\FixedUpdater.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\FileReader.cpp" />
-    <ClCompile Include="src\core\FileWriter.cpp" />
-    <ClCompile Include="src\core\graphics\RendererD3D11.cpp" />
-    <ClCompile Include="src\core\graphics\renderer.cpp">
-      <Filter>core</Filter>
+    <ClCompile Include="src\Core\Graphics\Mesh.cpp">
+      <Filter>Core\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\graphics\shader.cpp">
-      <Filter>core</Filter>
+    <ClCompile Include="src\Core\Graphics\MeshRenderer.cpp">
+      <Filter>Core\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\graphics\mesh.cpp">
-      <Filter>core</Filter>
+    <ClCompile Include="src\Core\Graphics\Renderer.cpp">
+      <Filter>Core\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\graphics\RendererD3D12.cpp" />
-    <ClCompile Include="src\core\Clock.cpp" />
-    <ClCompile Include="src\core\FixedUpdater.cpp" />
-    <ClCompile Include="src\core\graphics\MeshRenderer.cpp" />
-    <ClCompile Include="src\core\graphics\Texture.cpp" />
-    <ClCompile Include="src\core\graphics\RendererEmpty.cpp" />
+    <ClCompile Include="src\Core\Graphics\RendererD3D11.cpp">
+      <Filter>Core\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Graphics\RendererD3D12.cpp">
+      <Filter>Core\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Graphics\Shader.cpp">
+      <Filter>Core\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Graphics\Texture.cpp">
+      <Filter>Core\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Input\Input.cpp">
+      <Filter>Core\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Input\Keyboard.cpp">
+      <Filter>Core\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Input\Mouse.cpp">
+      <Filter>Core\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Monitor.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Precompiled.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Sound.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\String.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Transform.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Window.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Input\Joystick.cpp" />
   </ItemGroup>
 </Project>

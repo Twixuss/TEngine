@@ -2,29 +2,18 @@
 #include "console.h"
 #include "FileReader.h"
 namespace TEngine {
-   IDirectSound8* m_DirectSound;
-   IDirectSoundBuffer* m_primaryBuffer;
-   void Audio::Release() {
-      if (m_primaryBuffer) {
-         m_primaryBuffer->Release();
-         m_primaryBuffer = nullptr;
-      }
-      if (m_DirectSound) {
-         m_DirectSound->Release();
-         m_DirectSound = nullptr;
-      }
-      TE_WARN("~~~ Audio released");
-   }
-   void AudioPlayer::Init() {
+   ComPtr<IDirectSound8> m_DirectSound;
+   ComPtr<IDirectSoundBuffer> m_primaryBuffer;
+   void AudioPlayer::Init(const Window& wnd) {
       DSBUFFERDESC bufferDesc;
       WAVEFORMATEX waveFormat;
 
 
       // Initialize the direct sound interface pointer for the default sound device.
-      TE_HANDLE_HRESULT(DirectSoundCreate8(NULL, &m_DirectSound, NULL));
+      TE_HANDLE_HRESULT(DirectSoundCreate8(NULL, m_DirectSound.GetAddressOf(), NULL));
 
       // Set the cooperative level to priority so the format of the primary sound buffer can be modified.
-      TE_HANDLE_HRESULT(m_DirectSound->SetCooperativeLevel(Window::hWnd, DSSCL_PRIORITY));
+      TE_HANDLE_HRESULT(m_DirectSound->SetCooperativeLevel(wnd.GetHWND(), DSSCL_PRIORITY));
 
       //We have to setup the description of how we want to access the primary buffer.The dwFlags are the important part of this structure.In this case we just want to setup a primary buffer description with the capability of adjusting its volume.There are other capabilities you can grab but we are keeping it simple for now.
 
@@ -58,7 +47,7 @@ namespace TEngine {
    AudioClip::AudioClip(LPCWSTR filename) {
       unsigned int count;
       HRESULT result;
-      IDirectSoundBuffer* tempBuffer;
+      ComPtr<IDirectSoundBuffer> tempBuffer;
       unsigned char* waveData;
       unsigned char *bufferPtr;
       unsigned long bufferSize;
@@ -101,14 +90,12 @@ namespace TEngine {
       //Now the way to create a secondary buffer is fairly strange.First step is that you create a temporary IDirectSoundBuffer with the sound buffer description you setup for the secondary buffer.If this succeeds then you can use that temporary buffer to create a IDirectSoundBuffer8 secondary buffer by calling QueryInterface with the IID_IDirectSoundBuffer8 parameter.If this succeeds then you can release the temporary buffer and the secondary buffer is ready for use.
 
          // Create a temporary sound buffer with the specific buffer settings.
-      TE_HANDLE_HRESULT(m_DirectSound->CreateSoundBuffer(&bufferDesc, &tempBuffer, NULL));
+      TE_HANDLE_HRESULT(m_DirectSound->CreateSoundBuffer(&bufferDesc, tempBuffer.GetAddressOf(), NULL));
 
       // Test the buffer format against the direct sound 8 interface and create the secondary buffer.
       TE_HANDLE_HRESULT(tempBuffer->QueryInterface(IID_IDirectSoundBuffer8, (void**)&m_secondaryBuffer1));
 
       // Release the temporary buffer.
-      tempBuffer->Release();
-      tempBuffer = nullptr;
       //Now that the secondary buffer is ready we can load in the wave data from the audio file.First I load it into a memory buffer so I can check and modify the data if I need to.Once the data is in memory you then lock the secondary buffer, copy the data to it using a memcpy, and then unlock it.This secondary buffer is now ready for use.Note that locking the secondary buffer can actually take in two pointers and two positions to write to.This is because it is a circular buffer and if you start by writing to the middle of it you will need the size of the buffer from that point so that you don't write outside the bounds of it. This is useful for streaming audio and such. In this tutorial we create a buffer that is the same size as the audio file and write from the beginning to make things simple.
 
          // Move to the beginning of the wave data which starts at the end of the data chunk header.
@@ -140,11 +127,6 @@ namespace TEngine {
    }
    AudioClip::~AudioClip()
    {
-      if (m_secondaryBuffer1)
-      {
-         m_secondaryBuffer1->Release();
-         m_secondaryBuffer1 = nullptr;
-      }
    }
    void AudioClip::PlayWaveFile() {
       // Set position at the beginning of the sound buffer.

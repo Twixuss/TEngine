@@ -19,13 +19,13 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
@@ -45,29 +45,27 @@
     <OutDir>..\bin\Debug-windows-x86_64\TEngine\</OutDir>
     <IntDir>..\bin-int\Debug-windows-x86_64\TEngine\</IntDir>
     <TargetName>TEngine</TargetName>
-    <TargetExt>.lib</TargetExt>
+    <TargetExt>.dll</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\bin\Release-windows-x86_64\TEngine\</OutDir>
     <IntDir>..\bin-int\Release-windows-x86_64\TEngine\</IntDir>
     <TargetName>TEngine</TargetName>
-    <TargetExt>.lib</TargetExt>
-    <CodeAnalysisRuleSet>all.ruleset</CodeAnalysisRuleSet>
+    <TargetExt>.dll</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>TENGINE_LIBRARY_TYPE=TENGINE_LIBRARY_DLL;TENGINE_PLATFORM=TENGINE_PLATFORM_WINDOWS;TENGINE_LIBRARY;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..;src;src\core;..\Dependencies\DirectX\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TENGINE_PLATFORM=TENGINE_PLATFORM_WINDOWS;TENGINE_LIBRARY;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..;src;..\Dependencies\DirectX\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>precompiled.h</ForcedIncludeFiles>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <PreprocessToFile>false</PreprocessToFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -77,20 +75,16 @@
       <ImportLibrary>..\bin\Debug-windows-x86_64\TEngine\TEngine.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Debug-windows-x86_64\TEngine\TEngine.lib\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\TEngine\TEngine.lib ..\bin\Debug-windows-x86_64\Game &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\TEngine\TEngine.lib ..\bin\Debug-windows-x86_64\Game &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Debug-windows-x86_64\TEngine\TEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\TEngine\TEngine.dll ..\bin\Debug-windows-x86_64\Game &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\TEngine\TEngine.dll ..\bin\Debug-windows-x86_64\Game &gt; nul)</Command>
     </PostBuildEvent>
-    <Lib>
-      <AdditionalDependencies>d2d1.lib;d3d10.lib;d3d10_1.lib;d3d11.lib;d3d9.lib;d3dcompiler.lib;D3DCSX.lib;D3DCSXd.lib;d3dx10.lib;d3dx10d.lib;d3dx11.lib;d3dx11d.lib;d3dx9.lib;d3dx9d.lib;d3dxof.lib;dinput8.lib;dsound.lib;dwrite.lib;DxErr.lib;dxgi.lib;dxguid.lib;X3DAudio.lib;xapobase.lib;xapobased.lib;XAPOFX.lib;XInput.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\Dependencies\DirectX\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>TENGINE_LIBRARY_TYPE=TENGINE_LIBRARY_DLL;TENGINE_PLATFORM=TENGINE_PLATFORM_WINDOWS;TENGINE_LIBRARY;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..;src;src\core;..\Dependencies\DirectX\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TENGINE_PLATFORM=TENGINE_PLATFORM_WINDOWS;TENGINE_LIBRARY;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..;src;..\Dependencies\DirectX\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>precompiled.h</ForcedIncludeFiles>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -99,7 +93,6 @@
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <PreprocessToFile>false</PreprocessToFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -110,71 +103,76 @@
       <ImportLibrary>..\bin\Release-windows-x86_64\TEngine\TEngine.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Release-windows-x86_64\TEngine\TEngine.lib\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\TEngine\TEngine.lib ..\bin\Release-windows-x86_64\Game &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\TEngine\TEngine.lib ..\bin\Release-windows-x86_64\Game &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Release-windows-x86_64\TEngine\TEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\TEngine\TEngine.dll ..\bin\Release-windows-x86_64\Game &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\TEngine\TEngine.dll ..\bin\Release-windows-x86_64\Game &gt; nul)</Command>
     </PostBuildEvent>
-    <Lib>
-      <AdditionalDependencies>d2d1.lib;d3d10.lib;d3d10_1.lib;d3d11.lib;d3d9.lib;d3dcompiler.lib;D3DCSX.lib;D3DCSXd.lib;d3dx10.lib;d3dx10d.lib;d3dx11.lib;d3dx11d.lib;d3dx9.lib;d3dx9d.lib;d3dxof.lib;dinput8.lib;dsound.lib;dwrite.lib;DxErr.lib;dxgi.lib;dxguid.lib;X3DAudio.lib;xapobase.lib;xapobased.lib;XAPOFX.lib;XInput.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\Dependencies\DirectX\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\core\Clock.h" />
-    <ClInclude Include="src\core\common.h" />
-    <ClInclude Include="src\core\console.h" />
-    <ClInclude Include="src\core\core.h" />
-    <ClInclude Include="src\core\FileReader.h" />
-    <ClInclude Include="src\core\FileWriter.h" />
-    <ClInclude Include="src\core\FixedUpdater.h" />
-    <ClInclude Include="src\core\graphics\Graphics.h" />
-    <ClInclude Include="src\core\graphics\Material.h" />
-    <ClInclude Include="src\core\graphics\MeshRenderer.h" />
-    <ClInclude Include="src\core\graphics\RendererD3D12.h" />
-    <ClInclude Include="src\core\graphics\RendererEmpty.h" />
-    <ClInclude Include="src\core\graphics\ShaderBuffers.h" />
-    <ClInclude Include="src\core\graphics\Texture.h" />
-    <ClInclude Include="src\core\math\Vector4XM.h" />
-    <ClInclude Include="src\core\Transform.h" />
-    <ClInclude Include="src\core\input.h" />
-    <ClInclude Include="src\core\graphics\mesh.h" />
-    <ClInclude Include="src\core\graphics\MeshBuffers.h" />
-    <ClInclude Include="src\core\math\Constants.h" />
-    <ClInclude Include="src\core\math\Functions.h" />
-    <ClInclude Include="src\core\math\Matrix4x4.h" />
-    <ClInclude Include="src\core\math\Vector2.h" />
-    <ClInclude Include="src\core\math\Vector3.h" />
-    <ClInclude Include="src\core\math\Vector4.h" />
-    <ClInclude Include="src\core\Monitor.h" />
-    <ClInclude Include="src\core\precompiled.h" />
-    <ClInclude Include="src\core\graphics\renderer.h" />
-    <ClInclude Include="src\core\graphics\RendererD3D11.h" />
-    <ClInclude Include="src\core\graphics\shader.h" />
-    <ClInclude Include="src\core\sound.h" />
-    <ClInclude Include="src\core\window.h" />
-    <ClInclude Include="src\tengine.h" />
+    <ClInclude Include="src\Core\Application.h" />
+    <ClInclude Include="src\Core\Clock.h" />
+    <ClInclude Include="src\Core\Common.h" />
+    <ClInclude Include="src\Core\Console.h" />
+    <ClInclude Include="src\Core\FileReader.h" />
+    <ClInclude Include="src\Core\FileWriter.h" />
+    <ClInclude Include="src\Core\FixedUpdater.h" />
+    <ClInclude Include="src\Core\Graphics\Material.h" />
+    <ClInclude Include="src\Core\Graphics\MaterialParser.h" />
+    <ClInclude Include="src\Core\Graphics\MeshBuffers.h" />
+    <ClInclude Include="src\Core\Graphics\MeshRenderer.h" />
+    <ClInclude Include="src\Core\Graphics\Renderer.h" />
+    <ClInclude Include="src\Core\Graphics\RendererD3D11.h" />
+    <ClInclude Include="src\Core\Graphics\RendererD3D12.h" />
+    <ClInclude Include="src\Core\Graphics\Shader.h" />
+    <ClInclude Include="src\Core\Graphics\Texture.h" />
+    <ClInclude Include="src\Core\Graphics\mesh.h" />
+    <ClInclude Include="src\Core\Input\Input.h" />
+    <ClInclude Include="src\Core\Input\Joystick.h" />
+    <ClInclude Include="src\Core\Input\Keyboard.h" />
+    <ClInclude Include="src\Core\Input\KeyCombination.h" />
+    <ClInclude Include="src\Core\Input\Mouse.h" />
+    <ClInclude Include="src\Core\Math\Constants.h" />
+    <ClInclude Include="src\Core\Math\Functions.h" />
+    <ClInclude Include="src\Core\Math\Matrix4x4.h" />
+    <ClInclude Include="src\Core\Math\Vector.h" />
+    <ClInclude Include="src\Core\Math\Vector2.h" />
+    <ClInclude Include="src\Core\Math\Vector3.h" />
+    <ClInclude Include="src\Core\Math\Vector4.h" />
+    <ClInclude Include="src\Core\Math\Vector4XM.h" />
+    <ClInclude Include="src\Core\Monitor.h" />
+    <ClInclude Include="src\Core\Precompiled.h" />
+    <ClInclude Include="src\Core\Sound.h" />
+    <ClInclude Include="src\Core\String.h" />
+    <ClInclude Include="src\Core\Transform.h" />
+    <ClInclude Include="src\Core\Window.h" />
+    <ClInclude Include="src\TEngine.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\core\Clock.cpp" />
-    <ClCompile Include="src\core\common.cpp" />
-    <ClCompile Include="src\core\console.cpp" />
-    <ClCompile Include="src\core\core.cpp" />
-    <ClCompile Include="src\core\FileReader.cpp" />
-    <ClCompile Include="src\core\FileWriter.cpp" />
-    <ClCompile Include="src\core\FixedUpdater.cpp" />
-    <ClCompile Include="src\core\graphics\MeshRenderer.cpp" />
-    <ClCompile Include="src\core\graphics\RendererD3D12.cpp" />
-    <ClCompile Include="src\core\graphics\RendererEmpty.cpp" />
-    <ClCompile Include="src\core\graphics\Texture.cpp" />
-    <ClCompile Include="src\core\input.cpp" />
-    <ClCompile Include="src\core\graphics\mesh.cpp" />
-    <ClCompile Include="src\core\precompiled.cpp">
+    <ClCompile Include="src\Core\Application.cpp" />
+    <ClCompile Include="src\Core\Clock.cpp" />
+    <ClCompile Include="src\Core\Common.cpp" />
+    <ClCompile Include="src\Core\Console.cpp" />
+    <ClCompile Include="src\Core\FileReader.cpp" />
+    <ClCompile Include="src\Core\FileWriter.cpp" />
+    <ClCompile Include="src\Core\FixedUpdater.cpp" />
+    <ClCompile Include="src\Core\Graphics\Mesh.cpp" />
+    <ClCompile Include="src\Core\Graphics\MeshRenderer.cpp" />
+    <ClCompile Include="src\Core\Graphics\Renderer.cpp" />
+    <ClCompile Include="src\Core\Graphics\RendererD3D11.cpp" />
+    <ClCompile Include="src\Core\Graphics\RendererD3D12.cpp" />
+    <ClCompile Include="src\Core\Graphics\Shader.cpp" />
+    <ClCompile Include="src\Core\Graphics\Texture.cpp" />
+    <ClCompile Include="src\Core\Input\Input.cpp" />
+    <ClCompile Include="src\Core\Input\Joystick.cpp" />
+    <ClCompile Include="src\Core\Input\Keyboard.cpp" />
+    <ClCompile Include="src\Core\Input\Mouse.cpp" />
+    <ClCompile Include="src\Core\Monitor.cpp" />
+    <ClCompile Include="src\Core\Precompiled.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\core\graphics\renderer.cpp" />
-    <ClCompile Include="src\core\graphics\RendererD3D11.cpp" />
-    <ClCompile Include="src\core\graphics\shader.cpp" />
-    <ClCompile Include="src\core\sound.cpp" />
-    <ClCompile Include="src\core\window.cpp" />
+    <ClCompile Include="src\Core\Sound.cpp" />
+    <ClCompile Include="src\Core\String.cpp" />
+    <ClCompile Include="src\Core\Transform.cpp" />
+    <ClCompile Include="src\Core\Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

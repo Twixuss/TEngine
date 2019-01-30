@@ -1,8 +1,8 @@
 #pragma once
-#include "precompiled.h"
+#include "core/common.h"
 namespace TEngine {
    struct Texture {
-      Texture(CWString filename);
+      Texture(String filename);
       ~Texture();
       void SetToSlot(uint slot);
       void Release();

@@ -1,38 +1,44 @@
 #pragma once
 #include "core/common.h"
-namespace TEngine {
+namespace TEngine
+{
    using namespace Math;
-   struct TENGINE_API Material {
-      Material(Shader *shader) : m_Shader(shader), m_Properties(nullptr), m_PropertyCount(0), m_Dirty(true) {
-         data.D3D11.CBuffer = nullptr;
+   class LibraryInterface NoVirtualTable Material
+   {
+   public:
+      Material(const Material&) = delete;
+      virtual ~Material()
+      {
       }
-      inline void SetProperties(float *props, uint count) {
-         if (m_Properties)
-            delete m_Properties;
-         m_Properties = new float[count];
-         m_PropertyCount = count;
-         while (count--) {
-            m_Properties[count] = props[count];
-         }
+      inline void SetProperties(const std::vector<float>& props)
+      {
+         m_Properties = props;
       }
-      inline Shader *GetShader() const { return m_Shader; }
-      inline float *GetProperties() const { return m_Properties; }
-      inline uint GetPropertyCount() const { return m_PropertyCount; }
-      inline bool _IsDirty() const { return m_Dirty; }
-      inline void _SetDirty(bool v) { m_Dirty = v; }
-      inline auto &_GetBuffers() { return data; }
+      inline const Shader *GetShader() const
+      {
+         return m_Shader;
+      }
+      inline std::vector<float>& GetProperties()
+      {
+         return m_Properties;
+      }
+      inline void SetFloat(int i, float f)
+      {
+         m_Properties[i] = f;
+         OnChange();
+      }
+   protected:
+      Material()
+      {
+
+      }
+      virtual void OnChange() = 0;
    private:
-      Shader *m_Shader;
-      float *m_Properties;
-      uint m_PropertyCount;
-      bool m_Dirty = true;
-      union {
-         struct {
-            ID3D10Buffer *CBuffer;
-         }D3D10;
-         struct {
-            ID3D11Buffer *CBuffer;
-         }D3D11;
-      } data;
+      String m_Filename;
+      const Shader *m_Shader;
+      std::vector<float> m_Properties;
+      uint m_ID;
+
+      friend class RendererD3D11;
    };
 }

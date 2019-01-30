@@ -1,7 +1,7 @@
-#include "mesh.h"
-#include "shader.h"
-#include "input.h"
-#include "renderer.h"
+#include "core/input/input.h"
+#include "core/graphics/mesh.h"
+#include "core/graphics/shader.h"
+#include "core/graphics/renderer.h"
 namespace TEngine {
    Mesh::Mesh() : m_Buffers() {
       m_Vertices = new float3[3]{
@@ -14,7 +14,6 @@ namespace TEngine {
          2,1,0
       };
       m_IndexCount = 3;
-      Renderer::instance->CreateMeshBuffers(this);
    }
    Mesh::Mesh(float3 *positions, uint vertexCount, uint *indices, uint indexCount) : 
       m_Vertices(positions), 
@@ -22,12 +21,5 @@ namespace TEngine {
       m_Indices(indices),
       m_IndexCount(indexCount)
    {
-      Renderer::instance->CreateMeshBuffers(this);
-   }
-   Mesh::~Mesh() {
-      Release();
-   }
-   void Mesh::Release() {
-      m_Buffers.Release();
    }
 }

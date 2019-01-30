@@ -1,7 +1,13 @@
-#include "common.h"
-#include "console.h"
+#include "core/common.h"
+#include "core/console.h"
+#include "core/FileReader.h"
 namespace TEngine {
    HINSTANCE hInstance = nullptr;
+   Char CurrentDirectory[MAX_PATH];
+
+   void StopProgram(int code) {
+      exit(code);
+   }
 
    Color::Color() : r(0), g(0), b(0), a(0) {}
    Color::Color(float gray) : r(gray), g(gray), b(gray), a(1) {}
@@ -94,5 +100,19 @@ namespace TEngine {
          (1 - r)*(1 - a),
          (1 - g)*(1 - a),
          (1 - b)*(1 - a));
+   }
+
+   namespace Common {
+      void Init() {
+         GetCurrentDirectory(MAX_PATH, CurrentDirectory);
+      }
+
+      List<String> GetFilesInDirectory(const String& path) {
+         List<String> result;
+         for (const auto & f : std::filesystem::directory_iterator(path.CStr()))
+            if(f.is_regular_file())
+               result.AddInPlace(f.path().wstring());
+         return result;
+      }
    }
 }

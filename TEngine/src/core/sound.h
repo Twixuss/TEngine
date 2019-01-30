@@ -2,19 +2,19 @@
 #include "window.h"
 #include <dsound.h>
 namespace TEngine {
-   struct TENGINE_API AudioClip {
+   using namespace Microsoft::WRL;
+   struct LibraryInterface AudioClip {
       AudioClip(LPCWSTR filename);
       ~AudioClip();
       void PlayWaveFile();
       void Test();
    private:
-      IDirectSoundBuffer8* m_secondaryBuffer1;
+      ComPtr<IDirectSoundBuffer8> m_secondaryBuffer1;
    };
-   struct TENGINE_API AudioPlayer {
-      static void Init();
+   struct LibraryInterface AudioPlayer {
+      static void Init(const Window& wnd);
       void Play(AudioClip *clip);
    };
-   struct TENGINE_API Audio {
-      static void Release();
+   struct LibraryInterface Audio {
    };
 }

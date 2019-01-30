@@ -1,7 +1,4 @@
 #pragma once
-//#pragma warning(disable:4838)
-#pragma warning(disable:4005) // изменение макроопределения
-#pragma warning(disable:4244) // преобразование "Тип1" в "Тип2", возможна потеря данных
 //#define WIN32_LEAN_AND_MEAN
 //#define NOGDICAPMASKS
 //#define NOSYSMETRICS
@@ -19,7 +16,7 @@
 //#define NONLS
 //#define NOMEMMGR
 //#define NOMETAFILE
-//#define NOMINMAX
+#define NOMINMAX
 //#define NOOPENFILE
 //#define NOSCROLL
 //#define NOSERVICE
@@ -35,6 +32,12 @@
 //#define NOPROXYSTUB
 //#define NOIMAGE
 //#define NOTAPE
+
+#pragma warning(disable:4005) // изменение макроопределения
+#pragma warning(disable:4244) // преобразование "Тип1" в "Тип2", возможна потеря данных
+#pragma warning(disable:4251) // "Тип1" должен иметь dll - интерфейс для использования клиентами "Тип2"
+#pragma warning(disable:4305) // усечение из "Тип1" в "Тип2"
+#pragma warning(disable:4838) // преобразование "Тип1" в "Тип2" требует сужающего преобразования
 
 #include <Windows.h>
 #include <time.h>
@@ -52,9 +55,38 @@
 #include <D3DX11.h>
 #include <D3DCSX.h>
 #include <dsound.h>
+#include <dinput.h>
 #include <DWrite.h>
 #include <xnamath.h>
 #include <DxErr.h>
+#include <wrl.h>
+
+#pragma comment(lib, "d2d1.lib")
+#pragma comment(lib, "d3d10.lib")
+#pragma comment(lib, "d3d10_1.lib")
+#pragma comment(lib, "d3d11.lib")
+#pragma comment(lib, "d3d9.lib")
+#pragma comment(lib, "d3dcompiler.lib")
+#pragma comment(lib, "D3DCSX.lib")
+#pragma comment(lib, "D3DCSXd.lib")
+#pragma comment(lib, "d3dx10.lib")
+#pragma comment(lib, "d3dx10d.lib")
+#pragma comment(lib, "d3dx11.lib")
+#pragma comment(lib, "d3dx11d.lib")
+#pragma comment(lib, "d3dx9.lib")
+#pragma comment(lib, "d3dx9d.lib")
+#pragma comment(lib, "d3dxof.lib")
+#pragma comment(lib, "dinput8.lib")
+#pragma comment(lib, "dsound.lib")
+#pragma comment(lib, "dwrite.lib")
+#pragma comment(lib, "DxErr.lib")
+#pragma comment(lib, "dxgi.lib")
+#pragma comment(lib, "dxguid.lib")
+#pragma comment(lib, "X3DAudio.lib")
+#pragma comment(lib, "xapobase.lib")
+#pragma comment(lib, "xapobased.lib")
+#pragma comment(lib, "XAPOFX.lib")
+#pragma comment(lib, "XInput.lib")
 
 #include <iostream>
 #include <iomanip>
@@ -72,33 +104,34 @@
 #include <locale>
 #include <codecvt>
 #include <map>
-
-#include "core/math/Constants.h"
-#include "core/math/Functions.h"
-#include "core/math/Vector2.h"
-#include "core/math/Vector3.h"
-#include "core/math/Vector4.h"
-#include "core/math/Vector4XM.h"
-#include "core/math/Matrix4x4.h"
+#include <filesystem>
 
 #define TENGINE_PLATFORM_WINDOWS 0
-#if 0//TENGINE_LIBRARY_TYPE == TENGINE_LIBRARY_DLL
+#if TENGINE_LIBRARY_TYPE == TENGINE_LIBRARY_DLL && !defined(TENGINE_USE_SOURCE)
 #ifdef TENGINE_LIBRARY
-#define TENGINE_API __declspec(dllexport)
+#define LibraryInterface __declspec(dllexport)
 #else
-#define TENGINE_API __declspec(dllimport)
+#define LibraryInterface __declspec(dllimport)
 #endif
 #else
-#define TENGINE_API
+#define LibraryInterface
 #endif
+
+#define NoVirtualTable DECLSPEC_NOVTABLE
+#define Interface __interface
+
 #define _TEXTA(str) #str
 #define _TEXTW(str) L#str
 #define TEXTA(str) _TEXTA(str)
 #define TEXTW(str) _TEXTW(str)
 
-#define CASE_STR(c) case c:return"[" TEXTA(c) "]"
+#define CASE_STR(c) case c:return L"[" TEXTA(c) "]"
 
 #define RELEASE(ptr) if(ptr){ptr->Release();ptr=nullptr;}
+
+#define GETTER(ret,name,member) inline ret name() const {return member;}inline ret& name(){return member;}
+#define GET_CONST(ret,name,member) inline ret name() const {return member;}
+#define GET_REF(ret,name,member) inline ret& name(){return member;}
 
 #define TENGINE_VERSION 0.00
 
@@ -107,17 +140,20 @@
 // Expression will be always executed whether it's Debug or Release config
 #define ASSERT_EXEC(expression) expression
 #else
+//#define TE_ASSERT(x, msg) ((!!(x)) || MessageBoxA(nullptr, "File: " TEXTA(__FILE__) "\nLine: " TEXTA(__LINE__) "\nMessage: " msg, "Assertion failed", MB_OK))
+//#define TE_ASSERT(x, msg) (void)((!!(x)) || (_wassert(_CRT_WIDE(#x), _CRT_WIDE(__FILE__), (unsigned)(__LINE__)), 0));
 #define TE_ASSERT(x) assert(x)
 // Expression will be always executed whether it's Debug or Release config
 #define ASSERT_EXEC(expression) TE_ASSERT(expression)
+#define DEBUG_CRT
+#endif
+
+#ifdef DEBUG_CRT
+#define new new( _NORMAL_BLOCK, __FILE__, __LINE__)
 #endif
 
 namespace TEngine {
-   typedef wchar_t wchar;
-   typedef char *String;
-   typedef wchar *WString;
-   typedef const char *CString;
-   typedef const wchar *CWString;
+   typedef wchar_t Char;
 
    typedef signed char sbyte;
    typedef signed long long i64;
@@ -127,10 +163,23 @@ namespace TEngine {
    typedef unsigned long ulong;
    typedef unsigned long long u64;
 
-   struct App;
-   struct Renderer;
-   struct MeshBuffers;
-   struct Mesh;
-   struct Shader;
-   struct ShaderBuffers;
+   class Application;
+   class Input;
+   class InputDevice;
+   class Keyboard;
+   class Mouse;
+   class Joystick;
+   class Renderer;
+   class RendererD3D11;
+   class Mesh;
+   class Shader;
 }
+
+#include "core/math/Constants.h"
+#include "core/math/Functions.h"
+#include "core/math/Vector.h"
+#include "core/math/Vector2.h"
+#include "core/math/Vector3.h"
+#include "core/math/Vector4.h"
+#include "core/math/Vector4XM.h"
+#include "core/math/Matrix4x4.h"

@@ -29,7 +29,7 @@ project "TEngine"
    --}
 
 	pchheader "precompiled.h"
-	pchsource "precompiled.cpp"
+	pchsource "tengine/src/core/precompiled.cpp"
 
    forceincludes {
       "precompiled.h"
@@ -45,7 +45,6 @@ project "TEngine"
 	{
       ".",
 		"%{prj.name}/src",
-		"%{prj.name}/src/core",
 		"Dependencies/DirectX/Include"
 		--"%{IncludeDir.GLFW}"
 	}
@@ -59,9 +58,10 @@ project "TEngine"
 
 	}
 
+   staticruntime "Off"
+
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -78,12 +78,12 @@ project "TEngine"
 	filter "configurations:Debug"
 		defines "DEBUG"
 		symbols "On"
-      buildoptions "/MDd"
+      runtime "Debug"
 
 	filter "configurations:Release"
 		defines "NDEBUG"
 		optimize "On"
-      buildoptions "/MD"
+      runtime "Release"
 
 project "Game"
 	location "Game"
@@ -101,6 +101,10 @@ project "Game"
 
    include "Dependencies/DirectX/Lib"
 
+   libdirs {
+      "Dependencies/DirectX/Lib"
+   }
+
 	includedirs
 	{
 		"Dependencies/DirectX/Include",
@@ -114,7 +118,6 @@ project "Game"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -125,9 +128,9 @@ project "Game"
 	filter "configurations:Debug"
 		defines "DEBUG"
 		symbols "On"
-      buildoptions "/MDd"
+      runtime "Debug"
 
 	filter "configurations:Release"
 		defines "NDEBUG"
 		optimize "On"
-      buildoptions "/MD"
+      runtime "Release"

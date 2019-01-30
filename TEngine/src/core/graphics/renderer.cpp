@@ -1,16 +1,9 @@
-#include "console.h"
-#include "renderer.h"
-#include "RendererEmpty.h"
-#include "RendererD3D11.h"
+#include "core/console.h"
+#include "core/graphics/renderer.h"
+#include "core/graphics/RendererD3D11.h"
 namespace TEngine {
-   void Renderer::Create(GraphicsAPI api) {
-      if (instance) {
-         TE_ERROR("Changing renderer at runtime is not supported yet");
-      }
+   Renderer* Renderer::Create(GraphicsAPI api) {
       switch (api) {
-      case GraphicsAPI::None:
-         instance = new RendererEmpty;
-         break;
       case GraphicsAPI::Direct3D9:
          TE_ERROR("Direct3D9 is not supported yet");
          break;
@@ -18,7 +11,7 @@ namespace TEngine {
          TE_ERROR("Direct3D10 is not supported yet");
          break;
       case GraphicsAPI::Direct3D11:
-         instance = new RendererD3D11;
+         return new RendererD3D11;
          break;
       case GraphicsAPI::Direct3D12:
          TE_ERROR("Direct3D12 is not supported yet");
@@ -27,6 +20,7 @@ namespace TEngine {
          TE_ERROR("Unresolved renderer");
          break;
       }
+      return nullptr;
    }
       /*
       namespace D3D9 {

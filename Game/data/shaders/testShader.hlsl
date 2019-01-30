@@ -1,4 +1,4 @@
-#include "common.hlsl"
+#include "includes/common.hlsl"
 #pragma target 5.0
 cbuffer vars : register(b7) {
    float4 color;

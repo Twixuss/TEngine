@@ -1,7 +1,7 @@
 #pragma once
 #include "common.h"
 namespace TEngine{
-   struct TENGINE_API Clock {
+   struct LibraryInterface Clock {
       Clock();
       void Begin();
       void Reset();

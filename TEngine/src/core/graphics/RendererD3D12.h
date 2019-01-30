@@ -11,9 +11,9 @@ namespace TEngine {
       void SetFullscreen(bool value) override;
       void CreateMeshBuffers(Mesh * mesh) override;
       void DrawMesh(Mesh * mesh, Shader * shader) override;
-      bool CompileShaderFromFile(Shader * shader, CWString filename) override;
+      bool CompileShaderFromFile(Shader * shader, String filename) override;
       void SetActiveShader(Shader * shader) override;
-      CString GetName() override;
+      String GetName() override;
    private:
       IDXGISwapChain *swapChain;
    };

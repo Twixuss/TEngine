@@ -3,9 +3,7 @@
 namespace TEngine::Math {
    template<>
    struct Vector4<float> {
-      using Self = Vector4<float>;
-      using SelfRef = Vector4<float>&;
-      using SelfCRef = const Vector4<float>&;
+      using Vector = Vector4<float>;
       union {
          struct {
             float x, y, z, w;
@@ -13,62 +11,57 @@ namespace TEngine::Math {
          XMVECTOR xmv;
       };
       XMFINLINE Vector4() : xmv(XMVectorZero()) {}
-      XMFINLINE Vector4(SelfCRef other) : xmv(other.xmv) {}
-      XMFINLINE Vector4(FXMVECTOR v) : xmv(v) {}
+      XMFINLINE Vector(float x, float y, float z, float w) : xmv(XMVectorSet(x, y, z, w)) {}
+      XMFINLINE Vector4(const Vector& other) : xmv(other.xmv) {}
+      XMFINLINE Vector4(const XMVECTOR& v) : xmv(v) {}
       operator float3() {
          return float3(x, y, z);
       }
-      XMFINLINE explicit operator FXMVECTOR() {
-         return xmv;
-      }
-      XMFINLINE explicit operator XMVECTOR() const {
-         return xmv;
-      }
-      XMFINLINE bool Equals(SelfCRef v) {
+      XMFINLINE bool Equals(const Vector& v) {
          return XMVector4Equal(xmv, v.xmv);
       }
-      XMFINLINE Self operator+() {
-         return Self(*this);
+      XMFINLINE friend Vector& operator+=(Vector& a, const Vector& b) {
+         a.xmv = XMVectorAdd(a.xmv, b.xmv);
+         return a;
       }
-      XMFINLINE Self operator-() {
-         return XMVectorNegate(xmv);
+      XMFINLINE friend Vector& operator-=(Vector& a, const Vector& b) {
+         a.xmv = XMVectorSubtract(a.xmv, b.xmv);
+         return a;
       }
-      XMFINLINE Self operator+(SelfCRef v) {
-         return XMVectorAdd(xmv, v.xmv);
+      XMFINLINE friend Vector& operator*=(Vector& a, const Vector& b) {
+         a.xmv = XMVectorMultiply(a.xmv, b.xmv);
+         return a;
       }
-      XMFINLINE Self operator+(const float3 &v) {
-         return XMVectorAdd(xmv, XMVectorSet(v.x, v.y, v.z, 0));
+      XMFINLINE friend Vector& operator/=(Vector& a, const Vector& b) {
+         a.xmv = XMVectorDivide(a.xmv, b.xmv);
+         return a;
       }
-      XMFINLINE Self operator*(SelfCRef v) {
-         return XMVectorMultiply(xmv, v.xmv);
+      XMFINLINE friend Vector  operator+ (const Vector& a) {
+         return Vector(a);
       }
-      XMFINLINE SelfRef operator+=(SelfCRef v) {
-         xmv = XMVectorAdd(xmv, v.xmv);
-         return *this;
+      XMFINLINE friend Vector  operator- (const Vector& a) {
+         return XMVectorNegate(a.xmv);
       }
-      XMFINLINE SelfRef operator*=(SelfCRef v) {
-         xmv = XMVectorAdd(xmv, v.xmv);
-         return *this;
+      XMFINLINE friend Vector  operator+ (const Vector& a, const Vector& b) {
+         return XMVectorAdd(a.xmv, b.xmv);
       }
-      XMFINLINE static const Self Zero() {
+      XMFINLINE friend Vector  operator- (const Vector& a, const Vector& b) {
+         return XMVectorSubtract(a.xmv, b.xmv);
+      }
+      XMFINLINE friend Vector  operator* (const Vector& a, const Vector& b) {
+         return XMVectorMultiply(a.xmv, b.xmv);
+      }
+      XMFINLINE friend Vector  operator/ (const Vector& a, const Vector& b) {
+         return XMVectorDivide(a.xmv, b.xmv);
+      }
+      XMFINLINE friend bool    operator==(const Vector& a, const Vector& b) {
+         return XMVector4Equal(a.xmv, b.xmv);
+      }
+      XMFINLINE friend bool    operator!=(const Vector& a, const Vector& b) {
+         return XMVector4NotEqual(a.xmv, b.xmv);
+      }
+      XMFINLINE static const Vector Zero() {
          return XMVectorZero();
       }
    };
-   typedef float4 &float4Ref;
-   typedef const float4 &float4CRef;
-   XMFINLINE float4 operator+ (float4CRef a, float4CRef b) {
-      return XMVectorAdd(a.xmv, b.xmv);
-   }
-   XMFINLINE float4 operator- (float4CRef a, float4CRef b) {
-      return XMVectorSubtract(a.xmv, b.xmv);
-   }
-   XMFINLINE float4 operator* (float4CRef a, float4CRef b) {
-      return XMVectorMultiply(a.xmv, b.xmv);
-   }
-   XMFINLINE float4 operator/ (float4CRef a, float4CRef b) {
-      return XMVectorDivide(a.xmv, b.xmv);
-   }
-   XMFINLINE bool   operator==(float4CRef a, float4CRef b) {
-      return XMVector4Equal(a.xmv, b.xmv);
-   }
 }

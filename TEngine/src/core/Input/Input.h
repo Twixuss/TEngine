@@ -1,7 +1,10 @@
 #pragma once
-#include "window.h"
-namespace TEngine {
-   enum class Key {
+#include "core/window.h"
+namespace TEngine
+{
+   using namespace Microsoft::WRL;
+   enum class Key
+   {
       None = 0x00,
       Escape = 0x01,
       K1 = 0x02,
@@ -14,9 +17,9 @@ namespace TEngine {
       K8 = 0x09,
       K9 = 0x0A,
       K0 = 0x0B,
-      Minus = 0x0C,    
+      Minus = 0x0C,
       Equals = 0x0D,
-      Backspace = 0x0E,    
+      Backspace = 0x0E,
       Tab = 0x0F,
       Q = 0x10,
       W = 0x11,
@@ -30,7 +33,7 @@ namespace TEngine {
       P = 0x19,
       LeftBracket = 0x1A,
       RightBracket = 0x1B,
-      Enter = 0x1C,   
+      Enter = 0x1C,
       LeftControl = 0x1D,
       A = 0x1E,
       S = 0x1F,
@@ -43,7 +46,7 @@ namespace TEngine {
       L = 0x26,
       Semicolon = 0x27,
       Apostrophe = 0x28,
-      Grave = 0x29, 
+      Grave = 0x29,
       LeftShift = 0x2A,
       Backslash = 0x2B,
       Z = 0x2C,
@@ -55,10 +58,10 @@ namespace TEngine {
       M = 0x32,
       Comma = 0x33,
       Period = 0x34,
-      Slash = 0x35,    
+      Slash = 0x35,
       RightShift = 0x36,
-      NumpadMultiply = 0x37, 
-      LeftAlt = 0x38, 
+      NumpadMultiply = 0x37,
+      LeftAlt = 0x38,
       Space = 0x39,
       CapsLock = 0x3A,
       F1 = 0x3B,
@@ -72,21 +75,21 @@ namespace TEngine {
       F9 = 0x43,
       F10 = 0x44,
       NumLock = 0x45,
-      ScrollLock = 0x46,  
+      ScrollLock = 0x46,
       Numpad7 = 0x47,
       Numpad8 = 0x48,
       Numpad9 = 0x49,
-      NumpadMinus = 0x4A,   
+      NumpadMinus = 0x4A,
       Numpad4 = 0x4B,
       Numpad5 = 0x4C,
       Numpad6 = 0x4D,
-      NumpadPlus = 0x4E,   
+      NumpadPlus = 0x4E,
       Numpad1 = 0x4F,
       Numpad2 = 0x50,
       Numpad3 = 0x51,
       Numpad0 = 0x52,
-      NumpadDot = 0x53,  
-      OEM_102 =0x56,    /* <> or \| on RT 102-key keyboard (Non-U.S.) */
+      NumpadDot = 0x53,
+      OEM_102 = 0x56,    /* <> or \| on RT 102-key keyboard (Non-U.S.) */
       F11 = 0x57,
       F12 = 0x58,
       F13 = 0x64,    /*                     (NEC PC98) */
@@ -107,49 +110,51 @@ namespace TEngine {
       STOP = 0x95,    /*                     (NEC PC98) */
       AX = 0x96,    /*                     (Japan AX) */
       UNLABELED = 0x97,    /*                        (J3100) */
-      NextTrack = 0x99, 
+      NextTrack = 0x99,
       NumpadEnter = 0x9C,
       RightControl = 0x9D,
-      Mute = 0xA0,   
-      Calculator = 0xA1,    
-      PlayPause = 0xA2,    
-      MediaStop = 0xA4,   
-      VolumeDown = 0xAE,    
-      VolumeUp = 0xB0,    
-      WebHome = 0xB2,    
+      Mute = 0xA0,
+      Calculator = 0xA1,
+      PlayPause = 0xA2,
+      MediaStop = 0xA4,
+      VolumeDown = 0xAE,
+      VolumeUp = 0xB0,
+      WebHome = 0xB2,
       NumpadComma = 0xB3,
       NumpadDivide = 0xB5,
       SystemRequest = 0xB7,
-      RightAlt = 0xB8,    
-      Pause = 0xC5,    
-      Home = 0xC7,        
-      Up = 0xC8,          
-      PageUp = 0xC9,      
-      Left = 0xCB,        
-      Right = 0xCD,       
-      End = 0xCF,         
-      Down = 0xD0,        
-      PageDown = 0xD1,    
-      Insert = 0xD2,      
-      Delete = 0xD3,      
-      LeftWindows = 0xDB, 
+      RightAlt = 0xB8,
+      Pause = 0xC5,
+      Home = 0xC7,
+      Up = 0xC8,
+      PageUp = 0xC9,
+      Left = 0xCB,
+      Right = 0xCD,
+      End = 0xCF,
+      Down = 0xD0,
+      PageDown = 0xD1,
+      Insert = 0xD2,
+      Delete = 0xD3,
+      LeftWindows = 0xDB,
       RightWindows = 0xDC,
-      AppMenu = 0xDD,     
-      SysPower = 0xDE,    
-      SysSleep = 0xDF,    
-      SysWake = 0xE3,     
-      WebSearch = 0xE5,   
+      AppMenu = 0xDD,
+      SysPower = 0xDE,
+      SysSleep = 0xDF,
+      SysWake = 0xE3,
+      WebSearch = 0xE5,
       WebFavorites = 0xE6,
-      WebRefresh = 0xE7,  
-      WebStop = 0xE8,     
-      WebForward = 0xE9,  
-      WebBack = 0xEA,     
-      MyComputer = 0xEB,  
-      Mail = 0xEC,        
+      WebRefresh = 0xE7,
+      WebStop = 0xE8,
+      WebForward = 0xE9,
+      WebBack = 0xEA,
+      MyComputer = 0xEB,
+      Mail = 0xEC,
       MediaSelect = 0xED
    };
-   constexpr CString TENGINE_API ToString(Key key) {
-      switch (key) {
+   inline String ToString(Key key)
+   {
+      switch (key)
+      {
          CASE_STR(Key::None);
          CASE_STR(Key::Escape);
          CASE_STR(Key::K1);
@@ -295,60 +300,33 @@ namespace TEngine {
          CASE_STR(Key::MyComputer);
          CASE_STR(Key::Mail);
          CASE_STR(Key::MediaSelect);
-      default:                 return"[Key::Unknown]";
+      default: return L"[Key::Unknown]";
       }
    }
    template<typename T>
-   std::basic_ostream<T> &operator<<(std::basic_ostream<T> &stream, const Key key) {
+   std::basic_ostream<T> &operator<<(std::basic_ostream<T> &stream, const Key key)
+   {
       stream << ToString(key);
       return stream;
    }
-   namespace Input {
-      enum class Axis {
-         JoystickXPos = 0,
-         JoystickYPos = 1,
-         JoystickZPos = 2,
-         JoystickXRot = 3,
-         JoystickYRot = 4,
-         JoystickZRot = 5,
-      };
-      void TENGINE_API Init();
-      // Checks connected devices and returns their number
-      byte  TENGINE_API CheckDevices();
-      void  TENGINE_API Update();
-      void  TENGINE_API Release();
-      bool  TENGINE_API IsKeyboardAcquired() noexcept;
-      bool  TENGINE_API IsMouseAcquired() noexcept;
-      bool  TENGINE_API IsJoystickAcquired() noexcept;
-      int   TENGINE_API MouseDeltaX() noexcept;
-      int   TENGINE_API MouseDeltaY() noexcept;
-      int   TENGINE_API MouseDeltaZ() noexcept;
-      bool  TENGINE_API MouseDown(byte key) noexcept;
-      bool  TENGINE_API MouseHeld(byte key) noexcept;
-      bool  TENGINE_API MouseUp(byte key) noexcept;
-      Key   TENGINE_API AnyKeyDown() noexcept;
-      Key   TENGINE_API AnyKeyHeld() noexcept;
-      Key   TENGINE_API AnyKeyUp() noexcept;
-      bool  TENGINE_API KeyDown(Key key) noexcept;
-      bool  TENGINE_API KeyHeld(Key key) noexcept;
-      bool  TENGINE_API KeyUp(Key key) noexcept;
-      bool  TENGINE_API JoystickDown(byte key) noexcept;
-      bool  TENGINE_API JoystickHeld(byte key) noexcept;
-      bool  TENGINE_API JoystickUp(byte key) noexcept;
-      float TENGINE_API JoystickAxis(Axis axis) noexcept;
-      uint  TENGINE_API JoystickPOV(byte key) noexcept;
-      int   TENGINE_API JoystickSlider(byte key) noexcept;
-      struct KeyPair {
-         Key positive, negative;
-         Axis a;
-         KeyPair(Key positive, Key negative, Axis a) : positive(positive), negative(negative), a(a) {}
-         float operator()() {
-            auto result = Input::KeyHeld(positive) - Input::KeyHeld(negative);
-            return result ? result : JoystickAxis(a);
-         }
-         operator float() {
-            return (*this)();
-         }
-      };
+   class LibraryInterface Input
+   {
+   public:
+      Input(const Window&);
+   private:
+      const Window& r_Window;
+      ComPtr<IDirectInput8W> m_DirectInput;
+
+      friend class Keyboard;
+      friend class Mouse;
+      friend class Joystick;
+   };
+   class LibraryInterface NoVirtualTable InputDevice
+   {
+   public:
+      bool IsAcquired() const noexcept;
+      virtual void Update() noexcept = 0;
+   protected:
+      ComPtr<IDirectInputDevice8W> m_Device;
    };
 }

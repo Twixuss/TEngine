@@ -1,4 +1,4 @@
-#include "console.h"
+#include "Core/Console.h"
 #if TENGINE_LOG_LEVEL > 0
 #pragma warning(disable:4996)
 namespace TEngine {
@@ -22,29 +22,51 @@ namespace TEngine {
       t.ms = st.wMilliseconds;
       return t;
    }
-   void Console::SetColor(CONSOLE_COLOR fore, CONSOLE_COLOR back) {
+   void Console::SetColor(Console::Color fore, Console::Color back) {
       SetConsoleTextAttribute(hConsoleOutput, (WORD)fore + (WORD)back * 16);
    }
-   void Console::WaitForKeyPress() {
-      INPUT_RECORD r;
-      DWORD s;
-      FlushConsoleInputBuffer(hConsoleInput);
-      while (1) {
-         ReadConsoleInput(hConsoleInput, &r, 1, &s);
-         //PRINT(
-         //   s, ' ',
-         //   r.Event.KeyEvent.bKeyDown, ' ',
-         //   r.Event.KeyEvent.dwControlKeyState, ' ',
-         //   r.Event.KeyEvent.uChar.AsciiChar, ' ',
-         //   r.Event.KeyEvent.uChar.UnicodeChar, ' ',
-         //   r.Event.KeyEvent.wRepeatCount, ' ',
-         //   r.Event.KeyEvent.wVirtualKeyCode, ' ',
-         //   r.Event.KeyEvent.wVirtualScanCode
-         //);
-         if (r.Event.KeyEvent.uChar.AsciiChar != 0) {
-            break;
+   Console::Color CheckNameColor(const String& str)
+   {
+      if (str == L"TEngine")
+         return Console::Color::WHITE;
+      return Console::Color::GREEN;
+   }
+   void Console::PrintFunc(const char* func)
+   {
+      PrintText(Color::RED, "Function: ");
+      String word[8];
+      Color colors[8];
+      int cw = 0;
+      for (int i = 0;i < strlen(func);i++)
+      {
+         if (func[i] == ':')
+         {
+            colors[cw] = CheckNameColor(word[cw]);
+            i++;
+            cw++;
+            continue;
          }
+         word[cw].AddChar(func[i]);
       }
+      cw++;
+      for (int i = 0;i < cw;i++)
+      {
+         if (i != 0)
+         {
+            SetColor(Color::WHITE);
+            PrintText("::");
+         }
+         if (i == cw - 1)
+         {
+            SetColor(Color::YELLOW);
+         }
+         else
+         {
+            SetColor(colors[i]);
+         }
+         PrintText(word[i]);
+      }
+      PrintText('\n');
    }
 #endif
 }
